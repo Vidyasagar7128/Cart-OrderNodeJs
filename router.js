@@ -54,5 +54,13 @@ router.route('/order/:id/:cakeId')
     .post(userController.order)
 
 
+router.route('/cart/:id')
+    .get(userController.myCart)
+
+
+router.route('/order/:id')
+    .get(userController.myOrder)
+
+
 
 module.exports = router

@@ -49,5 +49,33 @@ module.exports = {
         //save User
         await user.save()
         res.status(200).json(user)
+    },
+    myCart: async (req, res, next) => {
+        try {
+            await User.findById({ _id: req.params.id }).populate('cart').exec((err, data) => {
+                if (!err) {
+                    console.log('cake', data['cart']);
+                    res.status(200).json(data['cart'])
+                }
+            })
+        } catch (e) {
+            console.log('Internal Server Error')
+            res.send('Internal Server Error')
+            next()
+        }
+    },
+    myOrder: async (req, res, next) => {
+        try {
+            await User.findById({ _id: req.params.id }).populate('order').exec((err, data) => {
+                if (!err) {
+                    console.log('cake', data['order']);
+                    res.status(200).json(data['order'])
+                }
+            })
+        } catch (e) {
+            console.log('Internal Server Error')
+            res.send('Internal Server Error')
+            next()
+        }
     }
 }
