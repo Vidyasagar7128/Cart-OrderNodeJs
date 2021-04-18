@@ -23,7 +23,7 @@ module.exports = {
                 type: req.body.type,
                 price: req.body.price,
                 deliveryType: req.body.delivery,
-                image: req.file.filename
+                image: `http://localhost:3000/profile/${req.file.filename}`
             })
             console.log('NewCake', newCake);
             //get user by Id
@@ -35,7 +35,7 @@ module.exports = {
             bake.cakes.push(newCake)
             //save User
             await bake.save()
-            res.status(200).json(newCake)
+            res.status(200).json({ success: true, image: `http://localhost:3000/profile/${req.file.filename}` })
         } catch (e) {
             console.log(e)
             res.send('Internal Server Error')

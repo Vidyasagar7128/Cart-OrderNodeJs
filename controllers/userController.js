@@ -33,10 +33,9 @@ module.exports = {
         //user.id = req.params.cakeId
         console.log(user.id)
         //add car to user's collection
-        user.cart.push(req.params.cakeId)
+        user.cart.addToSet(req.params.cakeId)
         //save User
         await user.save()
-        res.status(200).json(user)
     },
     order: async (req, res, next) => {
         //get user
@@ -54,7 +53,7 @@ module.exports = {
         try {
             await User.findById({ _id: req.params.id }).populate('cart').exec((err, data) => {
                 if (!err) {
-                    console.log('cake', data['cart']);
+                    console.log('Cart', data['cart']);
                     res.status(200).json(data['cart'])
                 }
             })
@@ -68,7 +67,7 @@ module.exports = {
         try {
             await User.findById({ _id: req.params.id }).populate('order').exec((err, data) => {
                 if (!err) {
-                    console.log('cake', data['order']);
+                    console.log('Order', data['order']);
                     res.status(200).json(data['order'])
                 }
             })
@@ -77,5 +76,22 @@ module.exports = {
             res.send('Internal Server Error')
             next()
         }
-    }
+    },
+    removeItemfromCart: async (req, res, next) => {
+        //get user
+        const user = await User.findById({ _id: req.params.id })
+        console.log(user)
+        //user.id = req.params.cakeId
+        console.log(user.id)
+        //add car to user's collection
+        if (user.cart.pull(req.params.cakeId)) {
+            //save User
+            await user.save()
+            res.send(req.params.cakeId)
+        }
+        else {
+            res.send('failed')
+        }
+        next()
+    },
 }

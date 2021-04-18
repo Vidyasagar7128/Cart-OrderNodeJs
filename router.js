@@ -3,7 +3,7 @@ const router = express.Router()
 const bakeryController = require('./controllers/bakeryControllers')
 const cakeController = require('./controllers/cakeController')
 const userController = require('./controllers/userController')
-
+const path = require("path")
 
 
 const multer = require('multer')
@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
         cb(null, './uploads/images')
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+        return cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 })
 const upload = multer({
@@ -60,6 +60,10 @@ router.route('/cart/:id')
 
 router.route('/order/:id')
     .get(userController.myOrder)
+
+
+router.route('/remove/:id/:cakeId')
+    .post(userController.removeItemfromCart)
 
 
 
