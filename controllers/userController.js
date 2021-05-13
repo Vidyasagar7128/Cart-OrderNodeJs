@@ -1,4 +1,5 @@
 const Cake = require("../models/cake");
+const GoogleUser = require("../models/googleUser");
 const User = require("../models/user");
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
         })
     },
     newUser: async (req, res, next) => {
-        const newdata = new User(req.body)
+        const newdata = new GoogleUser(req.body)
         await newdata.save()
         res.status(200).json({ success: true, newdata })
     },

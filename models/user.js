@@ -18,7 +18,8 @@ module.exports = mongoose.model('User', UserSchema)
 
 
 // {
-//     "name":"Chocolate",
-//     "contact":"Non-Vage",
-//     "address":"299",
+//     "uid":"Chocolate",
+//      "email": "asdfg"
+//     "displayName":"Chocolate",
+//     "photoUrl":"Non-Vage",
 // }

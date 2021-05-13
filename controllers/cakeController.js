@@ -22,7 +22,7 @@ module.exports = {
                 name: req.body.name,
                 type: req.body.type,
                 price: req.body.price,
-                deliveryType: req.body.delivery,
+                delivery: req.body.delivery,
                 image: `http://localhost:3000/profile/${req.file.filename}`
             })
             console.log('NewCake', newCake);

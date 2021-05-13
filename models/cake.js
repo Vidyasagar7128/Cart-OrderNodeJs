@@ -4,7 +4,7 @@ CakeSchema = new Schema({
     name: String,
     type: String,
     price: Number,
-    deliveryType: String,
+    delivery: String,
     image: String,
     bakery: {
         type: String,
